@@ -45,7 +45,17 @@ class MainActivity : AppCompatActivity() {
                 call: Call<ListPokemonApiResult>
             ) {
                 //Caso a requisição HTTP tenha sido bem sucedida
-                log.d(tag:"POKEMON_API", response.body().toString())
+                Log.d(tag:"POKEMON_API", response.body().toString())
+
+                val. tvName = findViewById<TextView>(R.id.tvName)
+
+                response.body()?.let{ it:ListPokemonApiResult
+                    tvName.text = it.results[0].name
+
+                    it.results.forEach { pokemon ->
+                        tvName.append(it.name + "\n")
+                    }
+                }
             }
 
             override fun on Failure(call: Call<ListPokemonApiResult>, t: Throwable) {
